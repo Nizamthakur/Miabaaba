@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% block content %}
+<main>
+    <div class="container">
+        <div class="table-responsive text-nowrap">
+            <h2>Order Summary</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Item Title</th>
+                        <th>Color</th>
+                        <th>Unit Price</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if order_items %}
+                        {% for order_item in order_items %}
+                        <tr>
+                            <th>{{ forloop.counter }}</th>
+                            <td>{{ order_item.item.title }}</td>
+                            <td>{{ order_item.color.name|default:"-" }}</td>
+                            <td>
+                                {% if order_item.item_price < order_item.original_price %}
+                                    <span class="text-danger"><del>৳{{ order_item.original_price|floatformat:2 }}</del></span><br>
+                                    ৳{{ order_item.item_price|floatformat:2 }}
+                                {% else %}
+                                    ৳{{ order_item.item_price|floatformat:2 }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}" class="text-danger">
+                                    <i class="fas fa-minus-circle fa-lg"></i>
+                                </a>
+                                <span class="mx-3">{{ order_item.quantity }}</span>
+                                <a href="{% url 'core:add-to-cart' order_item.item.slug %}" class="text-success">
+                                    <i class="fas fa-plus-circle fa-lg"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <strong>৳{{ order_item.get_total_item_price|floatformat:2 }}</strong>
+                                {% if order_item.amount_saved > 0 %}
+                                    <br><small class="text-success">Saved: ৳{{ order_item.amount_saved|floatformat:2 }}</small>
+                                {% endif %}
+                                <br>
+                                <a href="{% url 'core:remove-from-cart' order_item.item.slug %}" class="btn btn-link text-danger p-0 mt-1">
+                                    <i class="fas fa-trash-alt"></i> Remove
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        <tr class="bg-light">
+                            <td colspan="5" class="text-right border-0"><strong>Items Subtotal:</strong></td>
+                            <td class="border-0"><strong>৳{{ order_total|floatformat:2 }}</strong></td>
+                        </tr>
+                        {% if coupon %}
+                        <tr class="bg-light">
+                            <td colspan="5" class="text-right border-0"><strong>Coupon ({{ coupon.code }}):</strong></td>
+                            <td class="border-0 text-danger"><strong>-৳{{ order.get_amount_saved|floatformat:2 }}</strong></td>
+                        </tr>
+                        {% endif %}
+                        <tr class="bg-light">
+                            <td colspan="5" class="text-right border-0"><strong>Delivery Charge:</strong></td>
+                            <td class="border-0"><strong>৳{{ delivery_charge|floatformat:2 }}</strong></td>
+                        </tr>
+                        <tr class="table-active">
+                            <td colspan="5" class="text-right"><h4>Grand Total:</h4></td>
+                            <td><h4>৳{{ order.get_total|floatformat:2 }}</h4></td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">Your cart is empty.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+            <div class="text-right">
+                {% if order_items %}
+                    <a href="{% url 'core:checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+                {% endif %}
+                <a href="{% url 'core:home' %}" class="btn btn-secondary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

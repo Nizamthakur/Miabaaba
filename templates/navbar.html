@@ -1,0 +1,89 @@
+{% load cart_template_tags %}
+{% load static %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+
+        <!-- Brand -->
+       <a class="navbar-brand waves-effect" href="/" style="display: flex; align-items: center;">
+    <img src="{% static 'img/logo2.png' %}" alt="Miabaaba Logo" style="max-width: 200px; height: auto; margin-right: 5px;">
+<!--    <strong class="blue-text">Miabaaba</strong>-->
+</a>
+
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <!-- Left -->
+            <ul class="navbar-nav mr-auto">
+                <!-- Add more links here if needed -->
+            </ul>
+
+            <!-- Search Form -->
+            <form method="get" action="{% url 'core:search' %}" class="form-inline my-2 my-lg-0 search-form ml-auto">
+                <div class="input-group w-100">
+                    <input
+                        type="text"
+                        name="q"
+                        class="form-control search-input"
+                        placeholder="Search for items..."
+                        aria-label="Search"
+                        value="{{ query|default:'' }}"
+                        style="border-radius: 20px; padding: 5px 15px; font-size: 16px; height: 40px;"
+                    >
+                    <button
+                        type="submit"
+                        class="btn btn-outline-light my-2 my-sm-0 search-btn"
+                        style="border-radius: 20px; padding: 5px 15px; font-size: 16px; height: 40px; color:black!important;"
+                    >
+                        Go!
+                    </button>
+                </div>
+            </form>
+
+            <style>
+                @media (max-width: 767px) {
+                    .search-input {
+                        width: 100% !important; /* Make input take full width on small screens */
+                    }
+                    .search-btn {
+                        width: 100% !important; /* Make button take full width on small screens */
+                        margin-top: 10px; /* Add some space between input and button */
+                    }
+                }
+            </style>
+
+            <!-- Right -->
+            <ul class="navbar-nav nav-flex-icons">
+                <!-- Display the cart icon and item count for both authenticated and unauthenticated users -->
+                <li class="nav-item">
+                    <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+                        <!-- If user is authenticated, show cart count from their cart, else show cart count from session -->
+                        {% if request.user.is_authenticated %}
+                            <span class="badge red z-depth-1 mr-1">{{ request.user|cart_item_count }}</span>
+                        {% else %}
+                            <!-- Show cart count from session for unauthenticated users -->
+                            <span class="badge red z-depth-1 mr-1">{{ request.session.cart_item_count|default:0 }}</span>
+                        {% endif %}
+                        <i class="fas fa-shopping-cart" style="font-size: 20px;"></i>
+                        <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                    </a>
+                </li>
+
+                {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+                        <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+                    </a>
+                </li>
+                {% else %}
+
+                {% endif %}
+            </ul>
+        </div>
+
+    </div>
+</nav>

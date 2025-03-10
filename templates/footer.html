@@ -1,0 +1,252 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Footer Design</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    /* Your existing styles */
+    ul {
+      margin: 0px;
+      padding: 0px;
+    }
+    .footer-section {
+      background: #37a8e2;
+      position: relative;
+    }
+    .footer-cta {
+      border-bottom: 1px solid #fff;
+    }
+    .single-cta i {
+      color: #fff;
+      font-size: 30px;
+      float: left;
+      margin-top: 8px;
+    }
+    .cta-text {
+      padding-left: 15px;
+      display: inline-block;
+    }
+    .cta-text h4 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .cta-text span {
+      color: #fff;
+      font-size: 15px;
+    }
+    .footer-content {
+      position: relative;
+      z-index: 2;
+    }
+    .footer-logo img {
+      max-width: 200px;
+    }
+    .footer-text p {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #fff;
+      line-height: 28px;
+    }
+    .footer-social-icon span {
+      color: #fff;
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 20px;
+    }
+    .footer-social-icon a {
+      color: #fff;
+      font-size: 16px;
+      margin-right: 15px;
+    }
+    .footer-widget-heading h3 {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .footer-widget-heading h3::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -15px;
+      height: 2px;
+      width: 50px;
+      background: #fff;
+    }
+    .footer-widget ul li {
+      display: inline-block;
+      float: left;
+      width: 50%;
+      margin-bottom: 12px;
+    }
+    .footer-widget ul li a:hover {
+      color: #fff;
+    }
+    .footer-widget ul li a {
+      color: #fff;
+      text-transform: capitalize;
+    }
+    .subscribe-form {
+      position: relative;
+      overflow: hidden;
+    }
+    .subscribe-form input {
+      width: 100%;
+      padding: 14px 28px;
+      background: #fff;
+      border: 1px solid #2E2E2E;
+      color: #fff;
+      border-radius: 20px;
+    }
+    .subscribe-form button {
+      position: absolute;
+      right: 0;
+      background: #37a8e2;
+      padding: 13px 20px;
+      border: 1px solid #fff;
+      top: 0;
+      border-radius: 20px;
+    }
+    .copyright-area {
+      background: #202020;
+      padding: 25px 0;
+    }
+    .copyright-text p {
+      margin: 0;
+      font-size: 14px;
+      color: #878787;
+    }
+    .copyright-text p a {
+      color: #ff5e14;
+    }
+    .footer-menu li {
+      display: inline-block;
+      margin-left: 20px;
+    }
+    .footer-menu li:hover a {
+      color: #ff5e14;
+    }
+    .footer-menu li a {
+      font-size: 14px;
+      color: #878787;
+    }
+  </style>
+</head>
+<body>
+
+  <footer class="footer-section">
+    <div class="container">
+      <div class="footer-cta pt-5 pb-5">
+        <div class="row">
+          <div class="col-xl-4 col-md-4 mb-30">
+            <div class="single-cta">
+              <i class="fas fa-map-marker-alt"></i>
+              <div class="cta-text">
+                <h4>Find us</h4>
+                <span>192/A , Tilpapara, Khilgaon, Dhaka</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 mb-30">
+            <div class="single-cta">
+              <i class="fas fa-phone"></i>
+              <div class="cta-text">
+                <h4>Call us</h4>
+                <a href="tel:+8801840-154903"><span>01840-154903</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4 mb-30">
+            <div class="single-cta">
+              <i class="far fa-envelope-open"></i>
+              <div class="cta-text">
+                <h4>Mail us</h4>
+                <span>info@miabaaba.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-content pt-5 pb-5">
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 mb-50">
+            <div class="footer-widget">
+              <div class="footer-logo">
+                <a href="{% url 'core:home' %}">
+                  <img src="{% static 'img/logo1.jpeg' %}" class="img-fluid" alt="logo" style="max-width: 150px; width: 100%; height: auto;">
+                </a>
+              </div>
+              <div class="footer-text">
+                <p>Smart Shopping for Smart Living!</p>
+              </div>
+              <div class="footer-social-icon">
+                <span>Follow us</span>
+                <a href="https://www.facebook.com/profile.php?id=61572220262415" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-facebook-f" style="font-size: 24px; color: #3b5998; padding: 10px;"></i>
+                </a>
+                <a href="https://wa.me/8801707365693?text=Hello%20there!%20I%20need%20assistance." target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-whatsapp" style="font-size: 24px; color: #25D366; padding: 10px;"></i>
+                </a>
+                <a href="#" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-youtube" style="font-size: 24px; color: #FF0000; padding: 10px;"></i>
+                </a>
+                <a href="https://www.instagram.com/miabaaba?igsh=bGx5MDR4MmdvZXJn&utm_source=qr" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-instagram" style="font-size: 24px; color: #C13584; padding: 10px;"></i>
+                </a>
+                <a href="https://www.tiktok.com/@miabaaba?_t=ZS-8u8IDjqOT6C&_r=1" target="_blank" rel="noopener noreferrer">
+                  <i class="fab fa-tiktok" style="font-size: 24px; color: #69C9D0; padding: 10px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+            <div class="footer-widget">
+              <div class="footer-widget-heading">
+                <h3>Useful Links</h3>
+              </div>
+              <ul>
+                <li><a href="{% url 'core:home' %}">Home</a></li>
+                <li><a href="{% url 'core:about_us' %}">About</a></li>
+                <li><a href="{% url 'core:return' %}">Return & Exchange</a></li>
+                <li><a href="{% url 'core:contact' %}">Support</a></li>
+                <li><a href="{% url 'core:contact' %}">Contact</a></li>
+                <li><a href="{% url 'core:vacancy_list' %}">Career</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+            <div class="footer-widget">
+ <div class="footer-widget-heading">
+                <h3>Subscribe</h3>
+              </div>
+              <div class="footer-text mb-25">
+                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+              </div>
+              <div class="subscribe-form">
+                <form action="#">
+                  <input type="text" placeholder="Email Address">
+                  <button><i class="fab fa-telegram-plane"></i></button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <p>&copy; 2025 Miabaaba. All Rights Reserved.</p>
+
+    </div>
+  </footer>
+
+</body>
+</html>

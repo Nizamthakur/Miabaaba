@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support | Miabaaba</title>
+    <style>
+        /* Scoped styles for support page */
+        .support-container {
+            max-width: 900px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+            margin: 40px auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .support-container h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #1e3a4b;
+            background: linear-gradient(to right, #216373, #1e3a4b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .support-container h2 {
+            font-size: 22px;
+            color: #216373;
+            margin-top: 25px;
+            border-bottom: 2px solid #216373;
+            padding-bottom: 5px;
+        }
+
+        .support-container p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .faq {
+            margin-top: 20px;
+        }
+
+        .faq h3 {
+            font-size: 18px;
+            color: #216373;
+        }
+
+        .faq p {
+            font-size: 15px;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .support-form {
+            margin-top: 30px;
+        }
+
+        .support-form input, .support-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+
+        .support-form button {
+            background: #216373;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .support-form button:hover {
+            background: #1e3a4b;
+        }
+
+        .support-contact {
+            background-color: #216373;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .support-contact a {
+            color: #ffde59;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .support-contact a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .live-chat {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .live-chat a {
+            background: #ffde59;
+            color: #333;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .live-chat a:hover {
+            background: #ffcc00;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .support-container {
+                padding: 25px;
+            }
+            .support-container h1 {
+                font-size: 24px;
+            }
+            .support-container h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="support-container">
+        <h1>Support Center</h1>
+        <p>Need help? Find answers to common questions or contact us directly.</p>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq">
+            <h3>How can I track my order?</h3>
+            <p>Once your order is shipped, you will receive an email with tracking details.</p>
+
+            <h3>What is the return policy?</h3>
+            <p>You can return an item within 7 days of receiving it. Visit our <a href="return-policy.html">Return Policy</a> page for more details.</p>
+
+            <h3>How can I contact customer support?</h3>
+            <p>You can reach us via email or phone. See contact details below.</p>
+        </div>
+
+        <h2>Contact Support</h2>
+
+
+        <div class="live-chat">
+            <a href="https://wa.me/8801707365693?text=Hello%20there!%20I%20need%20assistance.">Live Chat Now</a>
+        </div>
+    </div>
+
+</body>
+</html>
+
+{% endblock content %}

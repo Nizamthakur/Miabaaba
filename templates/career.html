@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<style>
+  .career-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+h3 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #216373;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #216373;
+    outline: none;
+}
+
+button#career-submit {
+    width: 100%;
+    padding: 12px;
+    background: #216373;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button#career-submit:hover {
+    background: #1a4e56;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .career-container {
+        padding: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    input, textarea {
+        font-size: 14px;
+    }
+
+    button#career-submit {
+        font-size: 16px;
+    }
+}
+</style>
+<!--career start -->
+
+<div class="career-container">
+  <form id="career-form" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h3>Apply for a Position</h3>
+    <fieldset>
+      {{ form.full_name.label_tag }}<br>
+      {{ form.full_name }}<br>
+    </fieldset>
+    <fieldset>
+      {{ form.email.label_tag }}<br>
+      {{ form.email }}<br>
+    </fieldset>
+    <fieldset>
+      {{ form.phone_number.label_tag }}<br>
+      {{ form.phone_number }}<br>
+    </fieldset>
+    <fieldset>
+      {{ form.portfolio_url.label_tag }}<br>
+      {{ form.portfolio_url }}<br>
+    </fieldset>
+    <fieldset>
+      {{ form.cover_letter.label_tag }}<br>
+      {{ form.cover_letter }}<br>
+    </fieldset>
+    <fieldset>
+      {{ form.resume.label_tag }}<br>
+      {{ form.resume }}<br>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="career-submit">Submit Application</button>
+    </fieldset>
+  </form>
+</div>
+
+<!--career end -->
+{% endblock content %}

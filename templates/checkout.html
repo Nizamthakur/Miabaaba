@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<main>
+    <div class="container wow fadeIn">
+        <h2 class="my-5 h2 text-center">Checkout</h2>
+        <div class="row">
+            <!-- Left Column: Checkout Form -->
+            <div class="col-md-8 mb-4">
+                <div class="card">
+                    <form method="POST" class="card-body">
+                        {% csrf_token %}
+
+                        <!-- Shipping Address Section -->
+                        <h3 class="mb-4">Shipping Address</h3>
+                        <div id="shipping-form">
+                            {{ form.shipping_name|as_crispy_field }}
+                            {{ form.shipping_address|as_crispy_field }}
+                            {{ form.district|as_crispy_field }}
+                            {{ form.shipping_thana|as_crispy_field }}
+                            {{ form.phone_number|as_crispy_field }}
+                            {{ form.shipping_address2|as_crispy_field }}
+                            {{ form.shipping_country|as_crispy_field }}
+                            {{ form.shipping_zip|as_crispy_field }}
+                        </div>
+
+                        {% if default_shipping_address %}
+                        <div class="form-check mt-3">
+                            <input type="checkbox" class="form-check-input" id="use_default_shipping" name="use_default_shipping">
+                            <label for="use_default_shipping" class="form-check-label">
+                                Use default shipping address:
+                                {{ default_shipping_address.street_address|truncatechars:20 }}
+                            </label>
+                        </div>
+                        {% endif %}
+
+                        <hr>
+
+                        <!-- Payment Option Section -->
+                        <h3 class="mb-4">Payment Option</h3>
+                        <div>
+                            {% for value, name in form.fields.payment_option.choices %}
+                            <div class="form-check">
+                                <input type="radio" id="payment_{{ value }}" name="payment_option" value="{{ value }}"
+                                    class="form-check-input" required>
+                                <label for="payment_{{ value }}" class="form-check-label">{{ name }}</label>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Payment Method Specific Fields -->
+                        <div id="bikash-details" class="payment-details" style="display: none;">
+                            <label for="bikash_transaction_id">Enter Bikash Transaction ID</label>
+                            {{ form.bikash_transaction_id|as_crispy_field }}
+                        </div>
+                        <div id="nagad-details" class="payment-details" style="display: none;">
+                            <label for="nagad_transaction_id">Enter Nagad Transaction ID</label>
+                            {{ form.nagad_transaction_id|as_crispy_field }}
+                        </div>
+
+                        <hr class="mb-4">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            Continue to Checkout
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Right Column: Order Summary -->
+            <div class="col-md-4 mb-4">
+                {% include "order_snippet.html" %}
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const paymentRadios = document.querySelectorAll('input[name="payment_option"]');
+        const bikashDetails = document.getElementById('bikash-details');
+        const nagadDetails = document.getElementById('nagad-details');
+
+        function togglePaymentFields() {
+            let selectedPayment = document.querySelector('input[name="payment_option"]:checked')?.value;
+
+            if (selectedPayment === "B") {  // Change based on real values
+                bikashDetails.style.display = 'block';
+                nagadDetails.style.display = 'none';
+            } else if (selectedPayment === "N") {  // Change based on real values
+                nagadDetails.style.display = 'block';
+                bikashDetails.style.display = 'none';
+            } else {
+                bikashDetails.style.display = 'none';
+                nagadDetails.style.display = 'none';
+            }
+        }
+
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', togglePaymentFields);
+        });
+
+        togglePaymentFields(); // Run initially
+    });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const districtMapping = JSON.parse('{{ district_thana_mapping|escapejs }}');
+    const districtSelect = document.getElementById('district');
+    const thanaSelect = document.getElementById('shipping_thana');
+
+    function updateThanaOptions() {
+        const district = districtSelect.value;
+        thanaSelect.innerHTML = '<option value="">Select Thana</option>';
+
+        if (district && districtMapping[district]) {
+            districtMapping[district].forEach(thana => {
+                const option = document.createElement('option');
+                option.value = thana;
+                option.textContent = thana;
+                thanaSelect.appendChild(option);
+            });
+        }
+    }
+
+    // Initial setup
+    updateThanaOptions();
+
+    // Update on district change
+    districtSelect.addEventListener('change', function() {
+        updateThanaOptions();
+        thanaSelect.value = ""; // Reset selection
+    });
+});
+</script>
+{% endblock extra_scripts %}

@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="text-align: center; font-size: 2rem; margin-top: 20px; color: #333;">Miazu {{ category.name }}</h1>
+
+<div class="products" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; padding-bottom: 20px; padding-top: 20px;">
+    {% for item in items %}
+        <div class="product" style="background-color: #f9f9f9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; padding: 15px; text-align: center;">
+            <!-- Display Product Image -->
+            <div class="product-image" style="overflow: hidden;">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width: 100%; height: auto; object-fit: cover;">
+            </div>
+            <div class="product-info" style="padding: 15px;">
+                <h3 style="font-size: 1.5rem; font-weight: 600; color: #333; margin: 10px 0;">{{ item.title }}</h3>
+                <p style="color: #666; font-size: 1rem; line-height: 1.5;">{{ item.description }}</p>
+                <p class="price" style="font-size: 1.2rem; font-weight: bold;">Price: ৳{{ item.price }}</p>
+                <a href="{{ item.get_absolute_url }}" class="view-details"
+                   style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #216373; color: white; text-decoration: none; border-radius: 5px; font-weight: 600; transition: background-color 0.3s ease;">
+                    View Details
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Adding hover effect using inline style (since inline CSS doesn't support :hover directly) -->
+<script>
+    const products = document.querySelectorAll('.product');
+    products.forEach(product => {
+        product.addEventListener('mouseover', () => {
+            product.style.transform = 'translateY(-5px)';
+            product.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+        });
+        product.addEventListener('mouseout', () => {
+            product.style.transform = 'translateY(0)';
+            product.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+        });
+    });
+</script>
+
+<style>
+    /* Responsive Styles */
+    .products {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .product {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: calc(33% - 20px); /* Default: 3 products per row */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 15px;
+        text-align: center;
+    }
+
+    @media (max-width: 1200px) {
+        .product {
+            width: calc(50% - 20px); /* 2 products per row */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .product {
+            width: calc(100% - 20px); /* 1 product per row */
+        }
+
+        h1 {
+            font-size: 1.5rem; /* Smaller heading on mobile */
+        }
+
+        .product-info h3 {
+            font-size: 1.2rem; /* Smaller title on mobile */
+        }
+
+        .product-info p {
+            font-size: 0.9rem; /* Smaller description on mobile */
+        }
+
+        .price {
+            font-size: 1rem; /* Smaller price on mobile */
+        }
+
+        .view-details {
+            padding: 8px 16px; /* Smaller button padding on mobile */
+        }
+    }
+</style>
+
+{% endblock content %}

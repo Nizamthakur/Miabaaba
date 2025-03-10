@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+<style>
+  .job-vacancies-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.job-vacancies-header {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.job-vacancies-list {
+    list-style: none;
+    padding: 0;
+}
+
+.job-vacancies-item {
+    background: #fff;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.job-vacancies-item:hover {
+    transform: translateY(-5px);
+}
+
+.job-vacancies-item-title {
+    font-size: 22px;
+    color: #216373;
+    margin-bottom: 10px;
+}
+
+.job-vacancies-item-details {
+    font-size: 16px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.job-vacancies-apply-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 15px;
+    background: #216373;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.job-vacancies-apply-button:hover {
+    background: #1a4e56;
+}
+
+.job-vacancies-no-vacancies {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+}
+</style>
+<!--    vacancy start -->
+ <div class="job-vacancies-container">
+        <h1 class="job-vacancies-header">Current Job Vacancies</h1>
+        <ul class="job-vacancies-list">
+            {% if vacancies %}
+                {% for vacancy in vacancies %}
+                    <li class="job-vacancies-item">
+                        <h2 class="job-vacancies-item-title">{{ vacancy.title }}</h2>
+                        <p class="job-vacancies-item-details">{{ vacancy.description }}</p>
+                        <p class="job-vacancies-item-details"><strong>Location:</strong> {{ vacancy.location }}</p>
+                        <p class="job-vacancies-item-details"><strong>Posted on:</strong> {{ vacancy.posted_date }}</p>
+                        <p class="job-vacancies-item-details"><strong>Application Deadline:</strong> {{ vacancy.application_deadline }}</p>
+                        <a href="{% url 'core:career_view'  %}" class="job-vacancies-apply-button">Apply Now</a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p class="job-vacancies-no-vacancies">No vacancies available at the moment.</p>
+            {% endif %}
+        </ul>
+    </div>
+
+<!--    vacency end -->
+{% endblock content %}

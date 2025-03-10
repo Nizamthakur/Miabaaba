@@ -1,0 +1,203 @@
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+
+html,
+body,
+.view {
+    height: 100%;
+}
+
+
+/* Half Page Carousel itself*/
+
+.carousel {
+    height: 50%;
+}
+
+.carousel .carousel-inner {
+    height: 100%;
+}
+
+.carousel .carousel-inner .carousel-item,
+.carousel .carousel-inner .active {
+    height: 100%;
+}
+
+
+/* Adjustment for mobile devices*/
+
+@media (max-width: 776px) {
+    .carousel {
+        height: 100%;
+    }
+}
+
+
+
+/*Slider Top-front page start */
+/* Slider container */
+.slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual slides */
+.slider .slide {
+    width: 100%;
+    display: none; /* Hide slides by default */
+    text-align: center;
+    position: absolute;
+}
+
+/* Active slide */
+.slider .slide.active {
+    display: block; /* Show only the active slide */
+}
+
+/* Slide image */
+.slider .slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Slide text */
+.slider .slide h2 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.slider .slide p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Navigation arrows */
+.slider .prev,
+.slider .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.slider .prev {
+    left: 10px;
+}
+
+.slider .next {
+    right: 10px;
+}
+
+/* Navigation dots */
+.slider .dots {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.slider .dots span {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider .dots span.active {
+    background-color: #333;
+}
+/*Slider Top-front page end */
+/*Search Functionality start*/
+.search-form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Input field styling */
+.search-input {
+    flex: 1; /* Ensures the input takes available space */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Search button styling */
+/* Search button styling */
+.search-btn {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #ff7a18, #e52e71);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 50px; /* Rounded button */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.search-btn:hover {
+    background: linear-gradient(45deg, #e52e71, #ff7a18); /* Reverse the gradient */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+}
+
+.search-btn:active {
+    transform: scale(0.98); /* Slight press effect */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input {
+        margin-bottom: 10px;
+    }
+}
+/*Search Functionality end*/
+/* Css for other product */
+@media (max-width: 576px) {
+    .related_more_products .col {
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+}
+/*Footer Start*/
+.product-code {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f5f5f5; /* Optional: Adds a background to highlight the code */
+    padding: 2px 5px; /* Optional: Adds padding around the text */
+
+}
