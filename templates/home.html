@@ -109,6 +109,22 @@
 .dropdown-item:hover {
     background-color: #2196f3!important;
 }
+    /* Ensure the slider is responsive */
+    .slider {
+        height: auto; /* Allow height to adjust based on content */
+    }
+
+    .slide img {
+        width: 100%;
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Cover the entire area without gaps */
+    }
+
+    @media (max-width: 576px) {
+        .slider {
+            height: 300px; /* Adjust height for mobile view */
+        }
+    }
 </style>
 
         <script>
