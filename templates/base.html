@@ -144,5 +144,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     {% block extra_scripts %}
     {% endblock extra_scripts %}
+  <script>
+function trackQuickView(product){
+    window.dataLayer.push({
+        event: "view_item",
+        ecommerce: {
+            items: [{
+                item_id: product.id,
+                item_name: product.name,
+                price: product.price,
+                category: product.category,
+                quantity: 1
+            }],
+            currency: "BDT"
+        }
+    });
+}
+
+// Quick View থেকে Add to Cart
+function trackAddToCart(product, qty=1){
+    window.dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+            items: [{
+                item_id: product.id,
+                item_name: product.name,
+                price: product.price,
+                category: product.category,
+                quantity: qty
+            }],
+            currency: "BDT"
+        }
+    });
+}
+</script>
+
 </body>
 </html>
