@@ -287,4 +287,52 @@
         zoomImage.style.transform = 'scale(1)'; // Reset the zoom on mouse leave
     });
 </script>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+// Prepare product object
+var productData = {
+    id: "{{ object.id }}",
+    name: "{{ object.title|escapejs }}",
+    price: {{ object.discount_price|default:object.price }},
+    category: "{{ object.get_category_display|escapejs }}",
+    brand: "{{ object.brand|default:''|escapejs }}",
+    quantity: 1
+};
+
+// Push view_item event on page load
+window.dataLayer.push({
+    event: "view_item",
+    ecommerce: {
+        items: [productData],
+        currency: "BDT"
+    }
+});
+
+// Add to Cart tracking
+var addToCartBtn = document.querySelector('form[action="{% url 'core:add-to-cart' slug=object.slug %}"] button[type="submit"]');
+if(addToCartBtn){
+    addToCartBtn.addEventListener('click', function(e){
+        e.preventDefault(); // prevent immediate form submit
+        var qtyInput = document.querySelector('input[name="quantity"]');
+        var qty = qtyInput ? parseInt(qtyInput.value) : 1;
+
+        // push add_to_cart event
+        window.dataLayer.push({
+            event: "add_to_cart",
+            ecommerce: {
+                items: [{
+                    ...productData,
+                    quantity: qty
+                }],
+                currency: "BDT"
+            }
+        });
+
+        // submit the form after pushing event
+        addToCartBtn.closest('form').submit();
+    });
+}
+</script>
+
 {% endblock content %}
