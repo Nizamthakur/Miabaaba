@@ -86,4 +86,28 @@
         </div>
     </div>
 </main>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+var cartItems = [
+    {% for item in cart.items %}
+    {
+        item_id: "{{ item.product.id }}",
+        item_name: "{{ item.product.title|escapejs }}",
+        price: {{ item.price }},
+        quantity: {{ item.quantity }},
+        category: "{{ item.product.get_category_display|escapejs }}"
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+];
+
+window.dataLayer.push({
+    event: "view_cart",
+    ecommerce: {
+        items: cartItems,
+        currency: "BDT"
+    }
+});
+</script>
+
 {% endblock %}
