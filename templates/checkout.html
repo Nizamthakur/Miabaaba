@@ -136,4 +136,24 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<script>
+window.dataLayer.push({
+    event: "begin_checkout",
+    ecommerce: {
+        items: [
+            {% for item in checkout.items %}
+            {
+                item_id: "{{ item.product.id }}",
+                item_name: "{{ item.product.title|escapejs }}",
+                price: {{ item.price }},
+                quantity: {{ item.quantity }},
+                category: "{{ item.product.get_category_display|escapejs }}"
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ],
+        currency: "BDT"
+    }
+});
+</script>
+
 {% endblock extra_scripts %}
